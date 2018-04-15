@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class platformhorizmovement : MonoBehaviour {
 	public float disp;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		transform.position = new Vector3(disp + Mathf.PingPong(2*Time.time, 4), transform.position.y, transform.position.z);
+
+	void Update () { //for movement of horizontal sliding platforms
+		transform.position = new Vector3(disp + Mathf.PingPong(2*Time.time, 4), //for moving platform left and right
+			transform.position.y, transform.position.z);
 	}
 }

@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class gameinfo : MonoBehaviour {
 
-	public int kills;
+	public int kills; //not killable game info and stats
 	public bool good;
 
 	void Awake() {
 		DontDestroyOnLoad (this);
 	}
-
 }

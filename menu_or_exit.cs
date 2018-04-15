@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class menu_or_exit : MonoBehaviour {
 
 	public GameObject thang;
-	// Use this for initialization
+
 	void Start () {
-		StartCoroutine ("Quitt");
+		StartCoroutine ("Quitt"); //if player wishes to quit the game
 	}
 
 	public IEnumerator Quitt() {

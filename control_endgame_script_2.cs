@@ -6,23 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class control_endgame_script_2 : MonoBehaviour {
 	public GameObject info;
-	// Use this for initialization
-	void Start () {
-		info = GameObject.Find ("thang");
-		if (info.GetComponent<gameinfo> ().good) {
+
+	void Start () { //this script is in the case that the dad didn't save his son
+		info = GameObject.Find ("thang"); //number of kills is taken from stats
+		if (info.GetComponent<gameinfo> ().good) { //if the father showed a good example to his son, this is the end game screen
 			Destroy(GameObject.Find("badtext"));
 		} else {
-			Destroy(GameObject.Find("goodtext"));
-			GameObject.Find ("badtext").GetComponent<Text> ().text = "You are a murderer. \nYou are dead. \nYour son is dead.\nKill count: " + info.GetComponent<gameinfo>().kills.ToString() + ".";
+			Destroy(GameObject.Find("goodtext")); //if the father showed a bad example to his son, this is the end game screen
+			GameObject.Find ("badtext").GetComponent<Text> ().text = 
+				"You are a murderer. \nYou are dead. \nYour son is dead.\n" +
+				"Kill count: " + info.GetComponent<gameinfo>().kills.ToString() + ".";
 		}
 	}
 
-	public void gotoend() {
-		//SceneManager.LoadScene (6);
+	public void gotoend() { //if the player exits
 		Application.Quit();
 	}
 
-	public void gotomenu() {
+	public void gotomenu() { //if the player restarts
 		info.GetComponent<gameinfo> ().kills = 0;
 		SceneManager.LoadScene (0);
 	}

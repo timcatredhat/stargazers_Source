@@ -8,23 +8,24 @@ public class son_control : MonoBehaviour {
 	public Vector3 eyeposrest, eyeposright, eyeposleft, eyeoutlinepos;
 	public bool eyerest, eyeleft, eyeright, eyeopen, blinktime, help;
 	public float shealth = 10;
-	// Use this for initialization
+
 	void Start () {
-		InvokeRepeating ("blink", 0, 2.2f);
-		InvokeRepeating ("helpswitch", 0, 1.3f);
-		eyeball = GameObject.FindGameObjectWithTag ("eyeballson");
+		InvokeRepeating ("blink", 0, 2.2f); //makes son blink
+		InvokeRepeating ("helpswitch", 0, 1.3f); //makes the son cry for help dialogue
+		eyeball = GameObject.FindGameObjectWithTag ("eyeballson"); //blinking stuff for son
 		eyeoutline = GameObject.FindGameObjectWithTag ("eyeoutlineson");
 		eyeclosed = GameObject.FindGameObjectWithTag ("eyeshutson");
 		eyeclosed.GetComponent<Renderer> ().enabled = false;
 		eyeposrest = eyeball.transform.position;
 		eyeposleft = eyeposrest - new Vector3 (0.4f, 0, 0);
 		eyeposright = eyeposrest + new Vector3 (0.4f, 0, 0);
-
 		dad = GameObject.FindGameObjectWithTag ("Player");
 	}
 	
-	// Update is called once per frame
 	void Update () {
+
+//makes the son mimic dad's movements and follow him around above him
+
 		eyeoutlinepos = eyeoutline.transform.position;
 		eyeposrest = eyeoutlinepos;
 		eyeposleft = eyeposrest - new Vector3 (0.13f, 0, 0);

@@ -6,23 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class control_endgame_screen : MonoBehaviour {
 	public GameObject info;
-	// Use this for initialization
-	void Start () {
-		info = GameObject.Find ("thang");
-		if (info.GetComponent<gameinfo> ().good) {
+
+	void Start () {//this script is in the case that the dad saved his kid
+		info = GameObject.Find ("thang"); //number of kills is taken from stats
+		if (info.GetComponent<gameinfo> ().good) { //if the father showed a good example to his son, this is the end game screen
 			Destroy(GameObject.Find("badtext"));
 		} else {
-			Destroy(GameObject.Find("goodtext"));
-			GameObject.Find ("badtext").GetComponent<Text> ().text = "March 21, 4924\n\nIt's been exactly a year since my dad gave his life for my freedom. He took " + info.GetComponent<gameinfo>().kills.ToString() + " down with him that fateful day. I hate those who took his life. \nI was spared to take revenge... someday.\n\nn.p";
+			Destroy(GameObject.Find("goodtext")); //if the father showed a bad example to his son, this is the end game screen
+			GameObject.Find ("badtext").GetComponent<Text> ().text = 
+				"March 21, 4924\n\nIt's been exactly a year since my dad " +
+				"gave his life for my freedom. He took " + info.GetComponent<gameinfo>().kills.ToString() + 
+				" down with him that fateful day. I hate those who took his life." +
+				" \nI was spared to take revenge... someday.\n\nn.p";
 		}
 	}
 
 	public void gotoend() {
-		//SceneManager.LoadScene (6);
-		Application.Quit();
+		Application.Quit(); //if the player exits
 	}
 
-	public void gotomenu() {
+	public void gotomenu() { //if the player restarts
 		info.GetComponent<gameinfo> ().kills = 0;
 		SceneManager.LoadScene (0);
 	}

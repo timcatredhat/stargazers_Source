@@ -6,19 +6,16 @@ public class enemy_bullet_control_right : MonoBehaviour {
 	public bool killit, killit2;
 	public GameObject player, blood, son;
 	public float damage = 1f;
-	//public bool shootleft;
-	// Use this for initialization
+
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
 		son = GameObject.FindGameObjectWithTag ("friend1");
 		Destroy (gameObject, 0.4f);
-
 	}
 
-	// Update is called once per frame
 	void Update () {
 
-		transform.Translate (new Vector3 (5, -0.2f) * 4 * Time.deltaTime);
+		transform.Translate (new Vector3 (5, -0.2f) * 4 * Time.deltaTime); //same as in enemy_bullet_control class, but for right shooters
 
 		if (player != null) {
 			if (killit) {

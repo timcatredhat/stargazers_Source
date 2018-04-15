@@ -4,18 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class endgamecontrol : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public void restartgame() {
-		SceneManager.LoadScene (0);
+		SceneManager.LoadScene (0); //if player wishes to restart
 	}
 }

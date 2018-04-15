@@ -5,19 +5,19 @@ using UnityEngine;
 public class platformmoververt : MonoBehaviour {
 	public float height;
 	public bool st = false;
-	// Use this for initialization
+
 	void Start () {
-		StartCoroutine (randstart ());
+		StartCoroutine (randstart ()); //for moving the vertical sliding platforms
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if (st) {
-			gameObject.transform.position = new Vector3 (gameObject.transform.position.x, Mathf.PingPong (2 * Time.time, 5) + height, gameObject.transform.position.z);
+			gameObject.transform.position = new Vector3 (gameObject.transform.position.x, //start oscillating platform up and down
+				Mathf.PingPong (2 * Time.time, 5) + height, gameObject.transform.position.z);
 		}
 	}
 
-	IEnumerator randstart() {
+	IEnumerator randstart() { //so that all vertical platforms aren't completely synced
 		yield return new WaitForSeconds (Random.Range (0, 2.2f));
 		st = true;
 	}

@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class blood_effect : MonoBehaviour {
 
-	// Use this for initialization
 	void Start () {
-		Destroy (gameObject, 0.2f);
+		Destroy (gameObject, 0.2f); //make blood disappear
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

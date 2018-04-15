@@ -10,8 +10,6 @@ public class end_cutscene : MonoBehaviour {
 	public GameObject dialogue1;
 	public GameObject fadescreen;
 
-
-	// Use this for initialization
 	void Start () {
 		fadescreen = GameObject.FindGameObjectWithTag ("fadeinout");
 		fadescreen.GetComponent<CanvasGroup> ().alpha = 1;
@@ -20,33 +18,29 @@ public class end_cutscene : MonoBehaviour {
 		m1 = d1.text;
 		d1.text = "";
 		StartCoroutine (talkone());
-
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
 		if (!doit) {
-			fadescreen.GetComponent<CanvasGroup> ().alpha -= 0.05f;
+			fadescreen.GetComponent<CanvasGroup> ().alpha -= 0.05f; //fading out
 		}
-
 
 		if (fadeout1) {
 			d1.GetComponent<CanvasGroup> ().alpha -= 0.1f;
 		}
 
 		if (doit) {
-			fadescreen.GetComponent<CanvasGroup> ().alpha += 0.05f;
-
+			fadescreen.GetComponent<CanvasGroup> ().alpha += 0.05f; //fading in
 		}
 	}
 
-	public void load() {
+	public void load() { //if you're at the first cutscene
 		fadeout1 = true;
 		StartCoroutine (end());
 	}
 
-	public void load2() {
+	public void load2() { //if you're at the second cutscene
 		fadeout1 = true;
 		StartCoroutine (end2());
 	}
@@ -55,22 +49,21 @@ public class end_cutscene : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.4f);
 	
-		foreach (char letter in m1.ToCharArray()) {
+		foreach (char letter in m1.ToCharArray()) { //types out the letters on the screen animated
 			d1.text += letter;
 			yield return new WaitForSeconds (0.045f);
 		}
 	}
 
-	public IEnumerator end() {
+	public IEnumerator end() { //if you're at the first cutscene and wish to go to the next (button controlled)
 		doit = true;
 		yield return new WaitForSeconds (2);
 		SceneManager.LoadScene (2);
 	}
 
-	public IEnumerator end2() {
+	public IEnumerator end2() { //if you're at the second cutscene and wish to start the game (button controlled)
 		doit = true;
 		yield return new WaitForSeconds (2);
 		SceneManager.LoadScene (3);
 	}
-
 }

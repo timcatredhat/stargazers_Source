@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PhysicsObject : MonoBehaviour {
 
-	public float minGroundNormalY = .65f;
+	public float minGroundNormalY = .65f; //available to edit in editor depending on desired gravity
 	public float gravityModifier = 1f;
 
 	protected Vector2 targetVelocity;
@@ -15,8 +15,6 @@ public class PhysicsObject : MonoBehaviour {
 	protected ContactFilter2D contactFilter;
 	protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
 	protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D> (16);
-
-
 	protected const float minMoveDistance = 0.001f;
 	protected const float shellRadius = 0.01f;
 
@@ -35,31 +33,18 @@ public class PhysicsObject : MonoBehaviour {
 	void Update () 
 	{
 		targetVelocity = Vector2.zero;
-		ComputeVelocity (); 
 	}
-
-	protected virtual void ComputeVelocity()
-	{
-
-	}
-
+		
 	void FixedUpdate()
 	{
 		velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
 		velocity.x = targetVelocity.x;
-
-		grounded = false;
-
+		grounded = false; //groundedness boolean
 		Vector2 deltaPosition = velocity * Time.deltaTime;
-
 		Vector2 moveAlongGround = new Vector2 (groundNormal.y, -groundNormal.x);
-
 		Vector2 move = moveAlongGround * deltaPosition.x;
-
 		Movement (move, false);
-
 		move = Vector2.up * deltaPosition.y;
-
 		Movement (move, true);
 	}
 
@@ -67,9 +52,9 @@ public class PhysicsObject : MonoBehaviour {
 	{
 		float distance = move.magnitude;
 
-		if (distance > minMoveDistance) 
+		if (distance > minMoveDistance) //for jumping of player character
 		{
-			int count = rb2d.Cast (move, contactFilter, hitBuffer, distance + shellRadius);
+			int count = rb2d.Cast (move, contactFilter, hitBuffer, distance + shellRadius); //surface rays are cast to
 			hitBufferList.Clear ();
 			for (int i = 0; i < count; i++) {
 				hitBufferList.Add (hitBuffer [i]);
@@ -77,7 +62,7 @@ public class PhysicsObject : MonoBehaviour {
 
 			for (int i = 0; i < hitBufferList.Count; i++) 
 			{
-				Vector2 currentNormal = hitBufferList [i].normal;
+				Vector2 currentNormal = hitBufferList [i].normal; //throws ray perpendicularly, sees if grounded or not
 				if (currentNormal.y > minGroundNormalY) 
 				{
 					grounded = true;
@@ -93,15 +78,10 @@ public class PhysicsObject : MonoBehaviour {
 				{
 					velocity = velocity - projection * currentNormal;
 				}
-
 				float modifiedDistance = hitBufferList [i].distance - shellRadius;
 				distance = modifiedDistance < distance ? modifiedDistance : distance;
 			}
-
-
 		}
-
 		rb2d.position = rb2d.position + move.normalized * distance;
 	}
-
 }
